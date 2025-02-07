@@ -1,10 +1,19 @@
-import './App.css'
+import { useState } from 'react'
+
+import { Button } from '@/components/ui/button';
+import { cn } from './lib/utils';
+import { Checkbox } from './components/ui/checkbox';
 
 function App() {
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [color, setColor] = useState<'blue' | 'red'>('blue');
+
   return (
-    <>
-      <h1>Testing</h1>
-    </>
+    <div className='h-screen w-screen bg-neutral-800 flex justify-center items-center'>
+      <h1 className='text-blue-500 font-3xl text-center'>Vite Testing</h1>
+      <Button className={cn(color === 'blue' ? 'bg-blue-500' : 'bg-red-500')} data-testid="button" disabled={isDisabled} onClick={() => setColor(c => c === 'blue' ? 'red' : 'blue')}>Test Button</Button>
+      <Checkbox data-testid="checkbox" onChange={e => setIsDisabled(!!e.currentTarget.value)} />
+    </div>
   )
 }
 
